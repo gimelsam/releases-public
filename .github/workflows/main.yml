@@ -1,0 +1,29 @@
+name: Build and Upload ASP.NET Core MVC
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Get the source code
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      # 2. Create Release and upload ZIP
+      - name: Create Release and upload ZIP
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          name: HGIMS v${{ github.run_number }}
+          files: HGIMS_APP_${{ github.run_number }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
