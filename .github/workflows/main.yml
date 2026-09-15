@@ -3,7 +3,7 @@ name: Build and Upload ASP.NET Core MVC
 on:
   push:
     branches:
-      - master
+      - test_ref
 
 permissions:
   contents: write
